@@ -11,4 +11,9 @@ class GuruModel extends Model
     {
         return DB::table('guru')->get();
     }
+
+    public function detailData($id_guru)
+    {
+        return DB::table('guru')->where('id_guru', $id_guru)->first();
+    }
 }

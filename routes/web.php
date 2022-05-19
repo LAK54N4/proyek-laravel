@@ -17,3 +17,5 @@ use App\Http\Controllers\GuruController;
 
 Route::get('/', [HomeController::class, 'index']);
 Route::get('/guru', [GuruController::class, 'index']);
+Route::get('/guru/detail/{id_guru}', [GuruController::class, 'detail']);
+
