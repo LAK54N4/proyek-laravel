@@ -22,4 +22,9 @@ class GuruModel extends Model
         DB::table('guru')->insert($data);
     }
 
+    public function editData($id_guru, $data)
+    {
+        DB::table('guru')->where('id_guru', $id_guru)->update($data);
+    }
+
 }
