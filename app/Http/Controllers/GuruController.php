@@ -30,4 +30,41 @@ class GuruController extends Controller
         ];
         return view('view_detailguru', $data);
     }
+
+    public function add()
+    {
+        return view('view_addguru');
+    }
+
+    public function insert()
+    {
+        Request()->validate([
+            'nip' => 'required|unique:guru,nip|min:6|max:6',
+            'nama_guru'=> 'required',
+            'mapel' => 'required',
+            'foto' => 'required|mimes:png,jpg, jpeg|max:1024',
+        ], [
+            'nip.required' => 'NIP harus diisi!',
+            'nip.unique' => 'NIP sudah ada',
+            'nip.min' => 'min 6 karakter',
+            'nip.max' => 'max 6 karakter',
+            'nama_guru.required' => 'Nama harus diisi',
+            'mapel.required' => 'Mapel harus diisi',
+            'foto.required' => 'harus diisi',
+        ]);
+
+        $file = Request()->foto;
+        $fileName = Request()->nip.'.'.$file->extension();
+        $file-> move(public_path('foto_guru'), $fileName);
+
+        $data = [
+            'nip' => Request()->nip,
+            'nama_guru' => Request()->nama_guru,
+            'mapel' => Request()-> mapel,
+            'foto' => $fileName,
+        ];
+
+        $this->GuruModel->addData($data);
+        return redirect()->route('guru')->with('pesan', 'Data berhasil ditambahkan');
+    }
 }
