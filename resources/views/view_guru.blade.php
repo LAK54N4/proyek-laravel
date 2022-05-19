@@ -3,4 +3,33 @@
 
 @section('content')
     <h1> Halaman Guru </h1>
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>No</th>
+                <th>Nama Guru</th>
+                <th>NIP</th>
+                <th>Mata Pelajaran</th>
+                <th>Foto</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            <?php $no=1; ?>
+            @foreach ($guru as $data)
+                <tr>
+                    <td>{{ $no++ }}</td>
+                    <td>{{ $data->nama_guru}}</td>
+                    <td>{{ $data->nip}}</td>
+                    <td>{{ $data->mapel}}</td>
+                    <td><img src="{{ url('foto_guru/'.$data->foto) }}" width="100px" alt="foto-guru"></td>
+                    <td>
+                        <a href="" class="btn btn-sm btn-success">Detail</a>
+                        <a href="" class="btn btn-sm btn-warning">Edit</a>
+                        <a href="" class="btn btn-sm btn-danger">Delete</a>
+                    </td>
+                </tr>
+            @endforeach
+        </tbody>
+    </table>
 @endsection
